@@ -207,8 +207,8 @@ class Tableberg_Admin {
 
         $menu_page_slug = 'tableberg-settings';
         $menu_page      = add_menu_page(
-            'Tableberg Settings',
-            'Tableberg',
+            __('Tableberg Settings', 'tableberg'),
+            __('Tableberg', 'tableberg'),
             'manage_options',
             $menu_page_slug,
             array($this, 'main_menu_template_cb'),
@@ -232,7 +232,7 @@ class Tableberg_Admin {
             ?>
              <div class="tableberg-review-notice notice notice-info" style="display: inline-block; position: relative; padding:0.5rem 1.5rem">
                  <button type="button" class="notice-dismiss Tableberg_HideReview_Notice" style="position: absolute; top: 2px; right: 2px;">
-                     <span class="screen-reader-text">Dismiss this notice.</span>
+                     <span class="screen-reader-text"><?php esc_html_e('Dismiss this notice.', 'tableberg'); ?></span>
                  </button>
                  <p style="font-size: 14px; line-height: 2;padding-right:2rem">
                      <?php
@@ -244,8 +244,8 @@ class Tableberg_Admin {
                  </p>
                  <ul style="list-style-type: none; padding: 0;">
                      <li>
-                         <a style="margin-right: 5px; margin-bottom: 5px;" class="button-primary" href="https://wordpress.org/support/plugin/tableberg/reviews/" target="_blank">Ok, I will gladly help!</a>
-                         <a class="Tableberg_HideReview_Notice button" href="javascript:void(0);">No, thanks</a>
+                         <a style="margin-right: 5px; margin-bottom: 5px;" class="button-primary" href="https://wordpress.org/support/plugin/tableberg/reviews/" target="_blank"><?php esc_html_e('Ok, I will gladly help!', 'tableberg'); ?></a>
+                         <a class="Tableberg_HideReview_Notice button" href="javascript:void(0);"><?php esc_html_e('No, thanks', 'tableberg'); ?></a>
                      </li>
                  </ul>
              </div>

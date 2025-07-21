@@ -42,14 +42,14 @@ class RegisterPatterns {
     }
 
     public static function categories() {
-        register_block_pattern_category('tableberg', array( 'label' => 'Tableberg' ));
+        register_block_pattern_category('tableberg', array( 'label' => __('Tableberg', 'tableberg') ));
 
-        register_block_pattern_category('comparison-table', array( 'label' => 'Comparison Table' ));
-        register_block_pattern_category('featured-box', array( 'label' => 'Featured Box' ));
-        register_block_pattern_category('pricing-table', array( 'label' => 'Pricing Table' ));
-        register_block_pattern_category('pros-cons', array( 'label' => 'Pros & Cons' ));
+        register_block_pattern_category('comparison-table', array( 'label' => __('Comparison Table', 'tableberg') ));
+        register_block_pattern_category('featured-box', array( 'label' => __('Featured Box', 'tableberg') ));
+        register_block_pattern_category('pricing-table', array( 'label' => __('Pricing Table', 'tableberg') ));
+        register_block_pattern_category('pros-cons', array( 'label' => __('Pros & Cons', 'tableberg') ));
 
-        register_block_pattern_category('other', array( 'label' => 'Other' ));
+        register_block_pattern_category('other', array( 'label' => __('Other', 'tableberg') ));
     }
 
     /**
@@ -93,7 +93,7 @@ class RegisterPatterns {
                     return self::generate_screenshot_path($pattern_obj, $image_path_segment);
                 },
                 'schema'       => array(
-                    'description' => 'The screenshot url of the tableberg pattern.',
+                    'description' => __('The screenshot url of the tableberg pattern.', 'tableberg'),
                     'type'        => 'string',
                     'oneOf'       => array(
                         array(
