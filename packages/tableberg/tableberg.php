@@ -54,6 +54,7 @@ if (!function_exists('tab_fs')) {
                     'is_premium' => false,
                     'has_addons' => true,
                     'has_paid_plans' => false,
+                    'is_org_compliant' => true,
                     'menu' => array(
                         'slug' => 'tableberg-settings',
                         'first-path' => 'admin.php?page=tableberg-settings&route=welcome',
