@@ -11,7 +11,8 @@
         "vendor/composer",
         "vendor/autoload.php",
         "readme.txt",
-        "tableberg.php"
+        "tableberg.php",
+        "composer.json"
     ],
     "scripts": {
         "build": "wp-scripts build",
