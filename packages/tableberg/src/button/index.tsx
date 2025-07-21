@@ -72,8 +72,8 @@ function edit({
         }
 
         return (
-            <PanelBody title={"Width settings"}>
-                <ButtonGroup aria-label={"Button width"}>
+            <PanelBody title={__("Width settings", "tableberg")}>
+                <ButtonGroup aria-label={__("Button width", "tableberg")}>
                     {[25, 50, 75, 100].map((widthValue) => {
                         return (
                             <Button
@@ -201,8 +201,8 @@ function edit({
                             [`has-text-align-${textAlign}`]: textAlign,
                         },
                     )}
-                    aria-label="Button text"
-                    placeholder="Add text…"
+                    aria-label={__("Button text", "tableberg")}
+                    placeholder={__("Add text…", "tableberg")}
                     value={text}
                     allowedFormats={["core/bold", "core/italic"]}
                     onChange={(value: string) =>
@@ -219,7 +219,7 @@ function edit({
             <BlockControls group="block">
                 <ToolbarWithDropdown
                     icon={alignNone}
-                    title="Align button"
+                    title={__("Align button", "tableberg")}
                     value={align}
                     onChange={blockAlignChange}
                     controlset="alignment"
@@ -234,7 +234,7 @@ function edit({
                     // @ts-ignore
                     <ToolbarButton
                         icon={isURLSet ? linkOff : link}
-                        title={isURLSet ? "Unlink" : "Link"}
+                        title={isURLSet ? __("Unlink", "tableberg") : __("Link", "tableberg")}
                         onClick={isURLSet ? unlink : startEditing}
                         isActive={isURLSet}
                     />
@@ -355,7 +355,7 @@ function edit({
 
             <InspectorControls group="advanced">
                 <TextControl
-                    label="HTML ID"
+                    label={__("HTML ID", "tableberg")}
                     onChange={(value: string) => {
                         setAttributes({ id: value });
                     }}
@@ -364,7 +364,7 @@ function edit({
             </InspectorControls>
             {isURLSet && (
                 <InspectorControls>
-                    <PanelBody title="Link rel">
+                    <PanelBody title={__("Link rel", "tableberg")}>
                         {ALL_REL.map((relOpt) => (
                             <>
                                 <CheckboxControl

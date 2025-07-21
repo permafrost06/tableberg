@@ -16,6 +16,7 @@ import {
 } from "@wordpress/blocks";
 import { Button, Flex, Placeholder, TextControl } from "@wordpress/components";
 import { useDispatch } from "@wordpress/data";
+import { __ } from "@wordpress/i18n";
 import { useState } from "react";
 import metadata from "../../block.json";
 import PatternsLibrary from "./Patterns";
@@ -66,17 +67,17 @@ export default function TableCreator({ clientId, proProps }: Props) {
     return (
         <div className="tableberg-table-creator">
             <Placeholder
-                label={"Tableberg"}
+                label={__("Tableberg", "tableberg")}
                 icon={<BlockIcon icon={TablebergIcon} />}
             >
                 <div className="tableberg-table-creator-heading">
-                    Create Blank Table
+                    {__("Create Blank Table", "tableberg")}
                 </div>
                 <Flex gap="10px" justify="center" align="end">
                     <TextControl
                         __nextHasNoMarginBottom
                         type="number"
-                        label={"Column count"}
+                        label={__("Column count", "tableberg")}
                         value={String(cols)}
                         onChange={(count) => {
                             setCols(count === "" ? undefined : Number(count));
@@ -87,7 +88,7 @@ export default function TableCreator({ clientId, proProps }: Props) {
                     <TextControl
                         __nextHasNoMarginBottom
                         type="number"
-                        label={"Row count"}
+                        label={__("Row count", "tableberg")}
                         value={String(rows)}
                         onChange={(count) => {
                             setRows(count === "" ? undefined : Number(count));
@@ -101,11 +102,11 @@ export default function TableCreator({ clientId, proProps }: Props) {
                         onClick={onCreateNew}
                         type="button"
                     >
-                        Create
+                        {__("Create", "tableberg")}
                     </Button>
                 </Flex>
                 <p className="tableberg-divider">
-                    <span>or</span>
+                    <span>{__("or", "tableberg")}</span>
                 </p>
                 <div className="tableberg-table-creator-flex">
                     <button
@@ -115,13 +116,13 @@ export default function TableCreator({ clientId, proProps }: Props) {
                         <div className="tableberg-table-creator-btn-icon">
                             {PreBuiltTableIcon}
                         </div>
-                        <span>Pre-Built Table</span>
+                        <span>{__("Pre-Built Table", "tableberg")}</span>
                     </button>
                     {!IS_PRO ? (
                         <LockedTableType
                             icon={WooTableIcon}
                             selected={"product-table"}
-                            name={"WooCommerce Table"}
+                            name={__("WooCommerce Table", "tableberg")}
                             link={
                                 "https://tableberg.com/woocommerce-product-table-plugin/"
                             }
@@ -136,26 +137,26 @@ export default function TableCreator({ clientId, proProps }: Props) {
                             <div className="tableberg-table-creator-btn-icon">
                                 {WooTableIcon}
                             </div>
-                            <span>WooCommerce Table</span>
+                            <span>{__("WooCommerce Table", "tableberg")}</span>
                         </button>
                     )}
                     <button className="tableberg-table-creator-btn tableberg-upcoming">
                         <div className="tableberg-table-creator-btn-icon">
                             {DataTableIcon}
                         </div>
-                        <span>Data Table (CSV, XML)</span>
+                        <span>{__("Data Table (CSV, XML)", "tableberg")}</span>
                     </button>
                     <button className="tableberg-table-creator-btn tableberg-upcoming">
                         <div className="tableberg-table-creator-btn-icon">
                             {AITableIcon}
                         </div>
-                        <span>AI Table</span>
+                        <span>{__("AI Table", "tableberg")}</span>
                     </button>
                     <button className="tableberg-table-creator-btn tableberg-upcoming">
                         <div className="tableberg-table-creator-btn-icon">
                             {PostsTableIcon}
                         </div>
-                        <span>Posts Table</span>
+                        <span>{__("Posts Table", "tableberg")}</span>
                     </button>
                 </div>
             </Placeholder>

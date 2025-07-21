@@ -3,6 +3,7 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { MenuGroup, MenuItem, Modal } from "@wordpress/components";
+import { __ } from "@wordpress/i18n";
 
 import TablebergIcon from "@tableberg/shared/icons/tableberg";
 import { BlockInstance, parse } from "@wordpress/blocks";
@@ -164,7 +165,7 @@ function PatternsLibrary({ onClose, onSelect }: PatternLibraryProps) {
             <div className="tableberg-pattern-library-modal">
                 <div className="tableberg-pattern-library-sidebar">
                     <div className="tableberg-pattern-library-sidebar-header">
-                        {TablebergIcon} <h2>Tableberg</h2>
+                        {TablebergIcon} <h2>{__("Tableberg", "tableberg")}</h2>
                     </div>
                     <MenuGroup className="tableberg-pattern-library-types">
                         <MenuItem
@@ -176,7 +177,7 @@ function PatternsLibrary({ onClose, onSelect }: PatternLibraryProps) {
                                 setCategoryFilter("");
                             }}
                         >
-                            <span>All</span>
+                            <span>{__("All", "tableberg")}</span>
                         </MenuItem>
                         {categories.map((cat) => {
                             return (
@@ -198,7 +199,7 @@ function PatternsLibrary({ onClose, onSelect }: PatternLibraryProps) {
                 </div>
                 <div className="tableberg-pattern-library-content">
                     <div className="tableberg-pattern-library-content-header">
-                        <span>Search</span>
+                        <span>{__("Search", "tableberg")}</span>
                         <PatternSearchControl onChange={handleSetSearch} />
                         <button onClick={onClose}>
                             <FontAwesomeIcon icon={faClose} />

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { __ } from "@wordpress/i18n";
 import blocks, { ENHANCED_FEATURES } from "@tableberg/shared/blocks";
 import blockIcon from "@tableberg/shared/icons/tableberg";
 import { PATTERN_UPSELLS } from "./patterns";
@@ -70,7 +71,7 @@ export function UpsellModalComponent({
                                         ? info.image
                                         : IMAGE_BASE + info.image
                                 }
-                                alt={info.title + " Demo"}
+                                alt={info.title + " " + __("Demo", "tableberg")}
                             />
                         )}
                         {info.upsellText && (
@@ -82,14 +83,13 @@ export function UpsellModalComponent({
                             />
                         )}
                         <p>
-                            Limited Time: Use code <b>TB20</b> to get a 20%
-                            discount.
+                            {__("Limited Time: Use code", "tableberg")} <b>TB20</b> {__("to get a 20% discount.", "tableberg")}
                         </p>
                     </div>
                     <div className="tableberg-upsell-modal-footer">
-                        <button onClick={onClose}>Cancel</button>
+                        <button onClick={onClose}>{__("Cancel", "tableberg")}</button>
                         <a href={link} target="_blank">
-                            Buy PRO
+                            {__("Buy PRO", "tableberg")}
                         </a>
                     </div>
                 </div>
