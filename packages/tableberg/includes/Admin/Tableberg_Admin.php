@@ -75,8 +75,8 @@ class Tableberg_Admin {
      * Add hook
      */
     public function add_tableberg_admin_hook() {
-        add_action('wp_ajax_toggle_control', array($this, 'update_toggle_control'));
-        add_action('wp_ajax_block_properties', array($this, 'update_block_properties'));
+        add_action('wp_ajax_tableberg_toggle_control', array($this, 'update_toggle_control'));
+        add_action('wp_ajax_tableberg_block_properties', array($this, 'update_block_properties'));
     }
 
     /**
@@ -135,7 +135,7 @@ class Tableberg_Admin {
             'ajax' => array(
                 'toggleControl' => array(
                     'url'    => admin_url('admin-ajax.php'),
-                    'action' => 'toggle_control',
+                    'action' => 'tableberg_toggle_control',
                     'nonce'  => wp_create_nonce('toggle_control'),
                 ),
             ),
@@ -145,7 +145,7 @@ class Tableberg_Admin {
             'ajax' => array(
                 'toggleControl' => array(
                     'url'    => admin_url('admin-ajax.php'),
-                    'action' => 'toggle_control',
+                    'action' => 'tableberg_toggle_control',
                     'nonce'  => wp_create_nonce('toggle_control'),
                 ),
             ),
@@ -155,7 +155,7 @@ class Tableberg_Admin {
             'ajax' => array(
                 'blockProperties' => array(
                     'url'    => admin_url('admin-ajax.php'),
-                    'action' => 'block_properties',
+                    'action' => 'tableberg_block_properties',
                     'nonce'  => wp_create_nonce('block_properties'),
                 ),
             ),
