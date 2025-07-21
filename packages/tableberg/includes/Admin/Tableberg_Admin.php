@@ -236,10 +236,10 @@ class Tableberg_Admin {
                  </button>
                  <p style="font-size: 14px; line-height: 2;padding-right:2rem">
                      <?php
-                    _e(
+                    echo wp_kses_post(__(
                         'Hello! Seems like you\'ve been using <strong>Tableberg</strong> for a while on your website. That\'s awesome!<br>If you can spare a few moments to rate it on wordpress.org, it would help us a lot (and boost my motivation).<br>Imtiaz Rayhan, developer of Tableberg',
                         'tableberg'
-                    );
+                    ));
             ?>
                  </p>
                  <ul style="list-style-type: none; padding: 0;">
@@ -256,7 +256,7 @@ class Tableberg_Admin {
                              'action': 'TablebergReviewNoticeHide'
                          };
                          $.ajax({
-                             url: "<?php echo admin_url('admin-ajax.php'); ?>",
+                             url: "<?php echo esc_url(admin_url('admin-ajax.php')); ?>",
                              type: "post",
                              data: data,
                              dataType: "json",
