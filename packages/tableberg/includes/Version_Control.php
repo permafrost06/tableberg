@@ -126,12 +126,9 @@ class Version_Control extends Version_Sync_Base {
                 } else {
                     activate_plugin('tableberg/tableberg.php');
                     $this->set_message(
-                        esc_html__(
-                            sprintf(
-                                'Plugin version %1$s installed successfully.',
-                                $target_version
-                            ),
-                            'tableberg'
+                        sprintf(
+                            esc_html__('Plugin version %1$s installed successfully.', 'tableberg'),
+                            esc_html($target_version)
                         )
                     );
                 }
@@ -290,8 +287,8 @@ class Version_Control extends Version_Sync_Base {
         $versions = new WP_Error(
             501,
             esc_html__(
-                'An error occurred while fetching wp-table-builder versions, please try again later',
-                'wp-table-builder'
+                'An error occurred while fetching tableberg versions, please try again later',
+                'tableberg'
             )
         );
 

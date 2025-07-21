@@ -226,7 +226,7 @@ function Inspector(props: MainPropTypes) {
                     resetAllFilter={() =>
                         setAttributes({ borderRadius: undefined })
                     }
-                    label="Border Radius"
+                    label={__("Border Radius", "tableberg")}
                     hasValue={() => !isEmpty(attributes.borderRadius)}
                     onDeselect={() => {
                         setAttributes({ borderRadius: undefined });

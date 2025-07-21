@@ -75,8 +75,8 @@ class Tableberg_Admin {
      * Add hook
      */
     public function add_tableberg_admin_hook() {
-        add_action('wp_ajax_toggle_control', array($this, 'update_toggle_control'));
-        add_action('wp_ajax_block_properties', array($this, 'update_block_properties'));
+        add_action('wp_ajax_tableberg_toggle_control', array($this, 'update_toggle_control'));
+        add_action('wp_ajax_tableberg_block_properties', array($this, 'update_block_properties'));
     }
 
     /**
@@ -135,7 +135,7 @@ class Tableberg_Admin {
             'ajax' => array(
                 'toggleControl' => array(
                     'url'    => admin_url('admin-ajax.php'),
-                    'action' => 'toggle_control',
+                    'action' => 'tableberg_toggle_control',
                     'nonce'  => wp_create_nonce('toggle_control'),
                 ),
             ),
@@ -145,7 +145,7 @@ class Tableberg_Admin {
             'ajax' => array(
                 'toggleControl' => array(
                     'url'    => admin_url('admin-ajax.php'),
-                    'action' => 'toggle_control',
+                    'action' => 'tableberg_toggle_control',
                     'nonce'  => wp_create_nonce('toggle_control'),
                 ),
             ),
@@ -155,7 +155,7 @@ class Tableberg_Admin {
             'ajax' => array(
                 'blockProperties' => array(
                     'url'    => admin_url('admin-ajax.php'),
-                    'action' => 'block_properties',
+                    'action' => 'tableberg_block_properties',
                     'nonce'  => wp_create_nonce('block_properties'),
                 ),
             ),
@@ -207,8 +207,8 @@ class Tableberg_Admin {
 
         $menu_page_slug = 'tableberg-settings';
         $menu_page      = add_menu_page(
-            'Tableberg Settings',
-            'Tableberg',
+            __('Tableberg Settings', 'tableberg'),
+            __('Tableberg', 'tableberg'),
             'manage_options',
             $menu_page_slug,
             array($this, 'main_menu_template_cb'),
@@ -232,20 +232,20 @@ class Tableberg_Admin {
             ?>
              <div class="tableberg-review-notice notice notice-info" style="display: inline-block; position: relative; padding:0.5rem 1.5rem">
                  <button type="button" class="notice-dismiss Tableberg_HideReview_Notice" style="position: absolute; top: 2px; right: 2px;">
-                     <span class="screen-reader-text">Dismiss this notice.</span>
+                     <span class="screen-reader-text"><?php esc_html_e('Dismiss this notice.', 'tableberg'); ?></span>
                  </button>
                  <p style="font-size: 14px; line-height: 2;padding-right:2rem">
                      <?php
-                    _e(
+                    echo wp_kses_post(__(
                         'Hello! Seems like you\'ve been using <strong>Tableberg</strong> for a while on your website. That\'s awesome!<br>If you can spare a few moments to rate it on wordpress.org, it would help us a lot (and boost my motivation).<br>Imtiaz Rayhan, developer of Tableberg',
                         'tableberg'
-                    );
+                    ));
             ?>
                  </p>
                  <ul style="list-style-type: none; padding: 0;">
                      <li>
-                         <a style="margin-right: 5px; margin-bottom: 5px;" class="button-primary" href="https://wordpress.org/support/plugin/tableberg/reviews/?filter=5#new-post" target="_blank">Ok, I will gladly help!</a>
-                         <a class="Tableberg_HideReview_Notice button" href="javascript:void(0);">No, thanks</a>
+                         <a style="margin-right: 5px; margin-bottom: 5px;" class="button-primary" href="https://wordpress.org/support/plugin/tableberg/reviews/" target="_blank"><?php esc_html_e('Ok, I will gladly help!', 'tableberg'); ?></a>
+                         <a class="Tableberg_HideReview_Notice button" href="javascript:void(0);"><?php esc_html_e('No, thanks', 'tableberg'); ?></a>
                      </li>
                  </ul>
              </div>
@@ -256,7 +256,7 @@ class Tableberg_Admin {
                              'action': 'TablebergReviewNoticeHide'
                          };
                          $.ajax({
-                             url: "<?php echo admin_url('admin-ajax.php'); ?>",
+                             url: "<?php echo esc_url(admin_url('admin-ajax.php')); ?>",
                              type: "post",
                              data: data,
                              dataType: "json",
@@ -282,7 +282,7 @@ class Tableberg_Admin {
      */
     public function tableberg_hide_review_notify() {
         update_option('tableberg_review_notify', 'yes');
-        echo json_encode(array('success'));
+        echo wp_json_encode(array('success'));
         exit;
     }
 }

@@ -171,7 +171,7 @@ function TablebergControls({
                     <ToolsPanelItem label={__("")} hasValue={() => true}>
                         <ToggleControl
                             checked={tableAttributes.fixedColWidth}
-                            label="Fixed width cells"
+                            label={__("Fixed width cells", "tableberg")}
                             onChange={(fixedColWidth) => {
                                 setTableAttributes({
                                     fixedColWidth,
@@ -292,10 +292,10 @@ function TablebergControls({
             </InspectorControls>
 
             <InspectorControls>
-                <PanelBody title="Header Settings">
+                <PanelBody title={__("Header Settings", "tableberg")}>
                     <ToggleControl
                         checked={tableAttributes.enableTableHeader === ""}
-                        label="Disable Header"
+                        label={__("Disable Header", "tableberg")}
                         onChange={(val) => {
                             setTableAttributes({
                                 enableTableHeader: val ? "" : "added",
@@ -306,7 +306,7 @@ function TablebergControls({
                         checked={
                             tableAttributes.enableTableHeader === "converted"
                         }
-                        label="Make Top Row Header"
+                        label={__("Make Top Row Header", "tableberg")}
                         onChange={(val) => {
                             setTableAttributes({
                                 enableTableHeader: val ? "converted" : "",
@@ -315,7 +315,7 @@ function TablebergControls({
                     />
                     <ToggleControl
                         checked={tableAttributes.enableTableHeader === "added"}
-                        label="Insert Header"
+                        label={__("Insert Header", "tableberg")}
                         onChange={(val) => {
                             setTableAttributes({
                                 enableTableHeader: val ? "added" : "",
@@ -323,10 +323,10 @@ function TablebergControls({
                         }}
                     />
                 </PanelBody>
-                <PanelBody title="Footer Settings">
+                <PanelBody title={__("Footer Settings", "tableberg")}>
                     <ToggleControl
                         checked={tableAttributes.enableTableFooter === ""}
-                        label="Disable Footer"
+                        label={__("Disable Footer", "tableberg")}
                         onChange={(val) => {
                             setTableAttributes({
                                 enableTableFooter: val ? "" : "added",
@@ -337,7 +337,7 @@ function TablebergControls({
                         checked={
                             tableAttributes.enableTableFooter === "converted"
                         }
-                        label="Make Bottom Row Footer"
+                        label={__("Make Bottom Row Footer", "tableberg")}
                         onChange={(val) => {
                             setTableAttributes({
                                 enableTableFooter: val ? "converted" : "",
@@ -346,7 +346,7 @@ function TablebergControls({
                     />
                     <ToggleControl
                         checked={tableAttributes.enableTableFooter === "added"}
-                        label="Insert Footer"
+                        label={__("Insert Footer", "tableberg")}
                         onChange={(val) => {
                             setTableAttributes({
                                 enableTableFooter: val ? "added" : "",
@@ -354,7 +354,7 @@ function TablebergControls({
                         }}
                     />
                 </PanelBody>
-                <PanelBody title="Table Settings">
+                <PanelBody title={__("Table Settings", "tableberg")}>
                     <HeightControl
                         value={tableAttributes.tableWidth}
                         label={__("Table Width", "tableberg")}
@@ -383,7 +383,7 @@ function TablebergControls({
                     </ToggleGroupControl>
                     <ToggleControl
                         checked={tableAttributes.disableThemeStyle}
-                        label="Disable Theme Style"
+                        label={__("Disable Theme Style", "tableberg")}
                         onChange={(disableThemeStyle) => {
                             setTableAttributes({
                                 disableThemeStyle,
@@ -613,13 +613,13 @@ function TablebergControls({
 
             <InspectorControls group="dimensions">
                 <SpacingControl
-                    label="Cell Padding"
+                    label={__("Cell Padding", "tableberg")}
                     value={cellPadding}
                     onChange={(val) => setTableAttributes({ cellPadding: val })}
                     onDeselect={() => setTableAttributes({ cellPadding: {} })}
                 />
                 <SpacingControl
-                    label="Cell Spacing"
+                    label={__("Cell Spacing", "tableberg")}
                     value={cellSpacing}
                     onChange={(val) => setTableAttributes({ cellSpacing: val })}
                     onDeselect={() => setTableAttributes({ cellSpacing: {} })}
@@ -631,11 +631,11 @@ function TablebergControls({
                         setAttributes({ blockSpacing: undefined })
                     }
                     className={"tools-panel-item-spacing"}
-                    label="Block SPacing"
+                    label={__("Block Spacing", "tableberg")}
                     hasValue={() => !!attributes.blockSpacing}
                 >
                     <SpacingControlSingle
-                        label="Block Spacing"
+                        label={__("Block Spacing", "tableberg")}
                         value={attributes.blockSpacing}
                         onChange={(blockSpacing) =>
                             setAttributes({ blockSpacing })
@@ -723,7 +723,7 @@ function TablebergControls({
                 />
                 <BorderWithRadiusControl
                     isShownByDefault={false}
-                    label="Inner Border"
+                    label={__("Inner Border", "tableberg")}
                     value={tableAttributes.innerBorder}
                     onChange={(innerBorder: any) =>
                         setTableAttributes({ innerBorder })
@@ -782,14 +782,14 @@ function TablebergControls({
                         <LockedControl isEnhanced selected="sticky-top-row">
                             <ToggleControl
                                 checked={false}
-                                label="Sticky Top Row"
+                                label={__("Sticky Top Row", "tableberg")}
                                 onChange={() => {}}
                             />
                         </LockedControl>
                         <LockedControl isEnhanced selected="sticky-first-col">
                             <ToggleControl
                                 checked={false}
-                                label="Sticky First Col"
+                                label={__("Sticky First Col", "tableberg")}
                                 onChange={() => {}}
                             />
                         </LockedControl>
@@ -798,7 +798,7 @@ function TablebergControls({
                         <LockedControl isEnhanced selected="search">
                             <ToggleControl
                                 checked={false}
-                                label="Enable Search"
+                                label={__("Enable Search", "tableberg")}
                                 onChange={() => {}}
                             />
                         </LockedControl>
@@ -807,14 +807,14 @@ function TablebergControls({
                         <LockedControl isEnhanced selected="sorting">
                             <ToggleControl
                                 checked={false}
-                                label="Enable Vertical Sorting"
+                                label={__("Enable Vertical Sorting", "tableberg")}
                                 onChange={() => {}}
                             />
                         </LockedControl>
                         <LockedControl isEnhanced selected="sorting">
                             <ToggleControl
                                 checked={false}
-                                label="Enable Horizontal Sorting"
+                                label={__("Enable Horizontal Sorting", "tableberg")}
                                 onChange={() => {}}
                             />
                         </LockedControl>

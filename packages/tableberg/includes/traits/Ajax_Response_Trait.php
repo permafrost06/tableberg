@@ -50,7 +50,7 @@ trait Ajax_Response_Trait {
      */
     public function send_json($die = true) {
         header('Content-Type: application/json');
-        echo json_encode($this->response_data);
+        echo wp_json_encode($this->response_data);
         $this->reset_data();
 
         if ($die) {

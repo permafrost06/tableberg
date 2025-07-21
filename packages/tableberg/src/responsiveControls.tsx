@@ -75,7 +75,7 @@ export const ResponsiveControls = ({
 
     return (
         <InspectorControls group="settings">
-            <PanelBody title="Responsiveness Settings" initialOpen={true}>
+            <PanelBody title={__("Responsiveness Settings", "tableberg")} initialOpen={true}>
                 <BaseControl __nextHasNoMarginBottom>
                     <ButtonGroup className="tableberg-responsiveness-device-switcher-container">
                         {[
@@ -144,11 +144,11 @@ export const ResponsiveControls = ({
                                 suffix="px"
                                 spinControls="none"
                                 size="small"
-                                help="The columns will be stacked when browser window width is less than this width"
+                                help={__("The columns will be stacked when browser window width is less than this width", "tableberg")}
                                 disabled={isDisabled}
                             />
                             <SelectControl
-                                label="Mode"
+                                label={__("Mode", "tableberg")}
                                 value={breakpoint?.mode || "scroll"}
                                 options={[
                                     { label: "Scroll", value: "scroll" },
