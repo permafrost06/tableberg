@@ -282,7 +282,7 @@ class Tableberg_Admin {
      */
     public function tableberg_hide_review_notify() {
         update_option('tableberg_review_notify', 'yes');
-        echo json_encode(array('success'));
+        echo wp_json_encode(array('success'));
         exit;
     }
 }
