@@ -244,7 +244,7 @@ class Tableberg_Admin {
                  </p>
                  <ul style="list-style-type: none; padding: 0;">
                      <li>
-                         <a style="margin-right: 5px; margin-bottom: 5px;" class="button-primary" href="https://wordpress.org/support/plugin/tableberg/reviews/?filter=5#new-post" target="_blank">Ok, I will gladly help!</a>
+                         <a style="margin-right: 5px; margin-bottom: 5px;" class="button-primary" href="https://wordpress.org/support/plugin/tableberg/reviews/" target="_blank">Ok, I will gladly help!</a>
                          <a class="Tableberg_HideReview_Notice button" href="javascript:void(0);">No, thanks</a>
                      </li>
                  </ul>
