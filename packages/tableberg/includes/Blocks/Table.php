@@ -316,7 +316,7 @@ class Table {
 
         $table_html = '<div ' . $wrapper_attributes . ' >' . $table . '</div>';
         if (!empty($attributes['showCaption']) && !empty($attributes['caption'])) {
-            $caption = esc_html($attributes['caption']);
+            $caption = wp_kses_post($attributes['caption']);
             return '<figure>' . $table_html . '<figcaption>' . $caption . '</figcaption></figure>';
         }
         return $table_html;

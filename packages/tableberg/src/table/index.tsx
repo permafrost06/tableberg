@@ -18,6 +18,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { __ } from "@wordpress/i18n";
+import { RichText } from "@wordpress/block-editor";
 
 export const ALLOWED_BLOCKS = ["tableberg/cell"];
 
@@ -233,10 +234,21 @@ export const PrimaryTable = (
                     <FontAwesomeIcon icon={faSearch} />
                 </div>
             )}
-            {attributes.showCaption && attributes.caption ? (
+            {attributes.showCaption ? (
                 <figure>
                     {table}
-                    <figcaption>{attributes.caption}</figcaption>
+                    <RichText
+                        tagName="figcaption"
+                        value={attributes.caption}
+                        onChange={(caption) => setAttributes({ caption })}
+                        placeholder={__("Enter table caption...", "tableberg")}
+                        allowedFormats={[
+                            "core/bold",
+                            "core/italic",
+                            "core/strikethrough",
+                            "core/link",
+                        ]}
+                    />
                 </figure>
             ) : (
                 table
