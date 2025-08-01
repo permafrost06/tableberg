@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/imtiazrayhan/
 Requires at least: 6.1
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 0.6.3
+Stable tag: 0.6.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ Table Block For the Block Editor. Craft Beautiful Tables With Ease.
 
 == Description ==
 
-The “Table Block by Tableberg” plugin for WordPress simplifies creating and managing tables within the block editor. It features intuitive sub-blocks, allowing users to add and customize tables easily. 
+The “Table Block by Tableberg” plugin for WordPress simplifies creating and managing tables within the block editor. It features intuitive sub-blocks, allowing users to add and customize tables easily.
 From pricing tables to product tables, you can build any type of tables using Tableberg. The plugin is designed for both novices and experienced users. It offers advanced functionalities like responsive controls, alignment adjustments, and cell merging, ensuring that tables look great on all devices without the need for coding skills.
 
 https://youtu.be/TKsL_bUVCTU
@@ -30,7 +30,7 @@ It comes with the following easy-to-use sub-blocks:
 * **Ribbon (Pro)**: Adds decorative ribbons for highlighting special information.
 * **Custom HTML (Pro)**: Enables the use of HTML for complex customizations.
 
-And here are the key features of the Tableberg plugin: 
+And here are the key features of the Tableberg plugin:
 
 * **Header Settings**: Options to disable the header, designate the top row as header, or insert a new header.
 * **Footer Settings**: Similar to header settings, with options for the footer including disable, designate, or insert.
@@ -43,7 +43,7 @@ And here are the key features of the Tableberg plugin:
 * **Column Width & Row Height**: Adjust the size of columns and rows to fit content or aesthetic preferences.
 * **Customizations for Each Block**: Detailed settings for each type of block inserted into the table.
 
-Now let’s see some of the use cases of the Tableberg plugin: 
+Now let’s see some of the use cases of the Tableberg plugin:
 
 * **Pricing Tables**: Ideal for displaying different pricing tiers with clear comparisons of features and costs.
 * **Comparison Tables**: Compare products, services, or options side by side to aid decision-making.
@@ -67,6 +67,17 @@ If you have any suggestions or have faced any issues, contact us [here](https://
 2. Core Table Block vs Tableberg Block
 
 == Changelog ==
+
+= 0.6.5 =
+* FIX: Include required files in the zip
+* FIX: Make all strings translatable
+* FIX: Rename functions to avoid conflicts
+* FIX: Sanitize outputs by escaping as needed
+* FIX: Enable freemius wordpress.org compliance mode
+* FIX: Change review link to show all ratings
+
+= 0.6.4 =
+* FIX: Update plugin name
 
 = 0.6.3 =
 * PRO: NEW: Woocommerce products table
@@ -108,7 +119,7 @@ If you have any suggestions or have faced any issues, contact us [here](https://
 *FIX: Review asking section changed
 *NEW: Added specific documentation link for each block
 *NEW: Added more icons to icon block
-*FIX: icon blocks select icon section scroll 
+*FIX: icon blocks select icon section scroll
 *FIX: changed default Item spacing
 
 = 0.5.6 =
