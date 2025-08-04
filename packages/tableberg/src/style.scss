@@ -65,6 +65,11 @@ div.wp-block-tableberg-wrapper {
         @include justify-table;
     }
 
+    &.justify-table-center .tableberg-table-wrapper {
+        width: fit-content;
+        margin-inline: auto;
+    }
+
     .tableberg-table-wrapper {
         position: relative;
     }

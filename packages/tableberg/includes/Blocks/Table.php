@@ -171,7 +171,7 @@ class Table {
 
         $wrapper_classes = ['wp-block-tableberg-wrapper'];
         $table_alignment = $attributes['tableAlignment'];
-        if ($table_alignment && $table_alignment !== 'center') {
+        if ($table_alignment) {
             $wrapper_classes[] = 'justify-table-' . $table_alignment;
         }
 
