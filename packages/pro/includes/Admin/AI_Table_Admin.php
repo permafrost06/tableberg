@@ -207,7 +207,7 @@ class AI_Table_Admin {
      * @param string $encrypted_key Encrypted API key
      * @return string Plain API key
      */
-    private function decrypt_api_key($encrypted_key) {
+    public function decrypt_api_key($encrypted_key) {
         // Check encryption method
         if (strpos($encrypted_key, 'ssl:') === 0 && function_exists('openssl_decrypt')) {
             $encrypted = substr($encrypted_key, 4);

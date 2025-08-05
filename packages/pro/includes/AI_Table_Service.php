@@ -33,11 +33,7 @@ class AI_Table_Service {
         
         // Use the AI_Table_Admin class to decrypt the key
         $admin = new AI_Table_Admin();
-        $reflection = new \ReflectionClass($admin);
-        $method = $reflection->getMethod('decrypt_api_key');
-        $method->setAccessible(true);
-        
-        return $method->invoke($admin, $settings['api_key']);
+        return $admin->decrypt_api_key($settings['api_key']);
     }
     
     /**
