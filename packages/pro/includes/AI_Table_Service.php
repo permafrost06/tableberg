@@ -2090,12 +2090,7 @@ IMPORTANT RULES:
         $content = preg_replace_callback('/&#(\d+);/', function($matches) {
             $num = intval($matches[1]);
             if ($num > 0 && $num < 1114112) { // Valid Unicode range
-                if (function_exists('mb_chr')) {
-                    return mb_chr($num, 'UTF-8');
-                } else {
-                    // Fallback for older PHP versions
-                    return html_entity_decode('&#' . $num . ';', ENT_QUOTES | ENT_HTML5, 'UTF-8');
-                }
+                return html_entity_decode('&#' . $num . ';', ENT_QUOTES | ENT_HTML5, 'UTF-8');
             }
             return $matches[0]; // Return original if invalid
         }, $content);
@@ -2104,12 +2099,7 @@ IMPORTANT RULES:
         $content = preg_replace_callback('/&#x([0-9a-fA-F]+);/', function($matches) {
             $num = hexdec($matches[1]);
             if ($num > 0 && $num < 1114112) { // Valid Unicode range
-                if (function_exists('mb_chr')) {
-                    return mb_chr($num, 'UTF-8');
-                } else {
-                    // Fallback for older PHP versions
-                    return html_entity_decode('&#x' . $matches[1] . ';', ENT_QUOTES | ENT_HTML5, 'UTF-8');
-                }
+                return html_entity_decode('&#x' . $matches[1] . ';', ENT_QUOTES | ENT_HTML5, 'UTF-8');
             }
             return $matches[0]; // Return original if invalid
         }, $content);
