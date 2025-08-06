@@ -181,7 +181,7 @@ class Button {
 
         $button = $url ? sprintf(
             '<a href="%1$s" %2$s rel="%3$s" target="%4$s">%5$s</a>',
-            $url,
+            esc_url($url),
             $button_attrs,
             esc_attr($rel),
             esc_attr($link_target),
