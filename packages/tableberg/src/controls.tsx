@@ -136,6 +136,27 @@ function TablebergControls({
         updateBlockAttributes(tableBlockClientId, attributes);
     };
 
+    const { getBlock } = useSelect((select) => {
+        const storeSelect = select(blockEditorStore) as BlockEditorStoreSelectors;
+        return {
+            getBlock: storeSelect.getBlock,
+        };
+    }, []);
+
+    const changeAllCellChildrenAlign = (align: string | undefined) => {
+        const tableBlock = getBlock(tableBlockClientId);
+        
+        if (!tableBlock) return;
+        
+        // Iterate through all cell blocks in the table
+        tableBlock.innerBlocks.forEach((cellBlock) => {
+            // For each cell, get its child blocks and update their alignment
+            cellBlock.innerBlocks?.forEach((childBlock) => {
+                updateBlockAttributes(childBlock.clientId, { align });
+            });
+        });
+    };
+
     const setRowStyle = (styles: TablebergBlockAttrs["rowStyles"][number]) => {
         if (!cellBlock) {
             return;
@@ -805,6 +826,13 @@ function TablebergControls({
                         setTableAttributes({ tableAlignment });
                     }}
                     controlset="all"
+                />
+                <ToolbarWithDropdown
+                    icon={alignNone}
+                    title="Align all cell children"
+                    onChange={changeAllCellChildrenAlign}
+                    value={undefined}
+                    controlset="alignment"
                 />
             </BlockControls>
         </>
