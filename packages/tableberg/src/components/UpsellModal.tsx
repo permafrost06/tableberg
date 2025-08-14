@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { __ } from "@wordpress/i18n";
 import blocks, { ENHANCED_FEATURES } from "@tableberg/shared/blocks";
 import blockIcon from "@tableberg/shared/icons/tableberg";
 import { PATTERN_UPSELLS } from "./patterns";
@@ -18,6 +19,7 @@ PATTERN_UPSELLS.forEach((p) => {
 interface Props {
     onClose: () => void;
     selected?: string;
+    link?: string;
 }
 
 export interface BlockUpsellInfo {
@@ -32,6 +34,7 @@ interface ComponentProps {
     info: BlockUpsellInfo;
     prev?: () => void;
     next?: () => void;
+    link?: string;
 }
 
 export function UpsellModalComponent({
@@ -39,6 +42,7 @@ export function UpsellModalComponent({
     info,
     prev,
     next,
+    link = "https://tableberg.com/pricing/",
 }: ComponentProps) {
     return (
         <div className="tableberg-upsell-modal">
@@ -67,7 +71,7 @@ export function UpsellModalComponent({
                                         ? info.image
                                         : IMAGE_BASE + info.image
                                 }
-                                alt={info.title + " Demo"}
+                                alt={info.title + " " + __("Demo", "tableberg")}
                             />
                         )}
                         {info.upsellText && (
@@ -79,17 +83,13 @@ export function UpsellModalComponent({
                             />
                         )}
                         <p>
-                            Limited Time: Use code <b>TB20</b> to get a 20%
-                            discount.
+                            {__("Limited Time: Use code", "tableberg")} <b>TB20</b> {__("to get a 20% discount.", "tableberg")}
                         </p>
                     </div>
                     <div className="tableberg-upsell-modal-footer">
-                        <button onClick={onClose}>Cancel</button>
-                        <a
-                            href="https://tableberg.com/pricing/"
-                            target="_blank"
-                        >
-                            Buy PRO
+                        <button onClick={onClose}>{__("Cancel", "tableberg")}</button>
+                        <a href={link} target="_blank">
+                            {__("Buy PRO", "tableberg")}
                         </a>
                     </div>
                 </div>
@@ -106,7 +106,11 @@ export function UpsellModalComponent({
     );
 }
 
-export function UpsellEnhancedModal({ onClose, selected }: Props) {
+export function UpsellEnhancedModal({
+    onClose,
+    selected,
+    link = "https://tableberg.com/pricing/",
+}: Props) {
     const [idx, setIdx] = useState(0);
     const info = ENHANCED_FEATURES[idx];
 
@@ -136,6 +140,7 @@ export function UpsellEnhancedModal({ onClose, selected }: Props) {
             info={info}
             prev={prev}
             next={next}
+            link={link}
         />
     );
 }

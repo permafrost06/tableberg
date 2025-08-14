@@ -1,6 +1,6 @@
 {
     "name": "tableberg",
-    "version": "0.6.3",
+    "version": "0.6.5",
     "description": "Table Block By Tableberg - Advanced Table Block for Block Editor",
     "author": "Dotcamp",
     "license": "GPL-2.0-or-later",
@@ -11,7 +11,8 @@
         "vendor/composer",
         "vendor/autoload.php",
         "readme.txt",
-        "tableberg.php"
+        "tableberg.php",
+        "composer.json"
     ],
     "scripts": {
         "build": "wp-scripts build",

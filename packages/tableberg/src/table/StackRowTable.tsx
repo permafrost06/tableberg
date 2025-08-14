@@ -16,6 +16,8 @@ import classNames from "classnames";
 import { getStyleClass } from "./get-classes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { __ } from "@wordpress/i18n";
+import { RichText } from "@wordpress/block-editor";
 import {
     getBorderCSS,
     getBorderRadiusCSS,
@@ -162,6 +164,18 @@ export default function StackRowTable(
         });
     }, []);
 
+    const table = (
+        <div
+            className="tableberg-table-wrapper"
+            style={{
+                ...getBorderCSS(attributes.tableBorder),
+                ...getBorderRadiusCSS(attributes.tableBorderRadius),
+            }}
+        >
+            <table {...blockProps}>{rowTemplates}</table>
+        </div>
+    );
+
     return (
         <>
             {attributes.search && (
@@ -172,15 +186,25 @@ export default function StackRowTable(
                     <FontAwesomeIcon icon={faSearch} />
                 </div>
             )}
-            <div
-                className="tableberg-table-wrapper"
-                style={{
-                    ...getBorderCSS(attributes.tableBorder),
-                    ...getBorderRadiusCSS(attributes.tableBorderRadius),
-                }}
-            >
-                <table {...blockProps}>{rowTemplates}</table>
-            </div>
+            {attributes.showCaption ? (
+                <figure>
+                    {table}
+                    <RichText
+                        tagName="figcaption"
+                        value={attributes.caption}
+                        onChange={(caption) => setAttributes({ caption })}
+                        placeholder={__("Enter table caption...", "tableberg")}
+                        allowedFormats={[
+                            "core/bold",
+                            "core/italic",
+                            "core/strikethrough",
+                            "core/link",
+                        ]}
+                    />
+                </figure>
+            ) : (
+                table
+            )}
             <div style={{ display: "none" }} key={colUpt}>
                 <div {...innerBlocksProps} />
             </div>

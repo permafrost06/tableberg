@@ -14,16 +14,13 @@ import {
     createBlock,
     createBlocksFromInnerBlocksTemplate,
 } from "@wordpress/blocks";
-import {
-    Button,
-    Flex,
-    Placeholder,
-    TextControl,
-} from "@wordpress/components";
+import { Button, Flex, Placeholder, TextControl } from "@wordpress/components";
 import { useDispatch } from "@wordpress/data";
+import { __ } from "@wordpress/i18n";
 import { useState } from "react";
 import metadata from "../../block.json";
 import PatternsLibrary from "./Patterns";
+import LockedTableType from "../../components/LockedTableType";
 import UpsellModal from "../../components/UpsellModal";
 
 interface Props {
@@ -53,47 +50,57 @@ export default function TableCreator({ clientId, proProps }: Props) {
         let initialInnerBlocks: InnerBlockTemplate[] = [];
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
-                initialInnerBlocks.push(["tableberg/cell", { row: i, col: j }, [["core/paragraph"]]]);
+                initialInnerBlocks.push([
+                    "tableberg/cell",
+                    { row: i, col: j },
+                    [["core/paragraph"]],
+                ]);
             }
         }
 
-        storeActions.replaceInnerBlocks(clientId, createBlocksFromInnerBlocksTemplate(initialInnerBlocks));
+        storeActions.replaceInnerBlocks(
+            clientId,
+            createBlocksFromInnerBlocksTemplate(initialInnerBlocks),
+        );
 
         storeActions.updateBlockAttributes(clientId, {
             version: metadata.version,
             cells: initialInnerBlocks.length,
             rows,
-            cols
+            cols,
         });
-
     };
+
+    const IS_PRO = TABLEBERG_CFG.IS_PRO;
 
     return (
         <div className="tableberg-table-creator">
             <Placeholder
-                label={"Tableberg"}
+                label={__("Tableberg", "tableberg")}
                 icon={<BlockIcon icon={TablebergIcon} />}
             >
-                <div className="tableberg-table-creator-heading">Create Blank Table</div>
+                <div className="tableberg-table-creator-heading">
+                    {__("Create Blank Table", "tableberg")}
+                </div>
                 <Flex gap="10px" justify="center" align="end">
                     <TextControl
                         __nextHasNoMarginBottom
                         type="number"
-                        label={"Column count"}
+                        label={__("Column count", "tableberg")}
                         value={String(cols)}
                         onChange={(count) => {
-                            setCols( (count === "") ? undefined : Number(count));
+                            setCols(count === "" ? undefined : Number(count));
                         }}
-                    min="1"
-                    className="blocks-table__placeholder-input"
+                        min="1"
+                        className="blocks-table__placeholder-input"
                     />
                     <TextControl
                         __nextHasNoMarginBottom
                         type="number"
-                        label={"Row count"}
+                        label={__("Row count", "tableberg")}
                         value={String(rows)}
                         onChange={(count) => {
-                            setRows( (count === "") ? undefined : Number(count));
+                            setRows(count === "" ? undefined : Number(count));
                         }}
                         min="1"
                         className="blocks-table__placeholder-input"
@@ -104,65 +111,75 @@ export default function TableCreator({ clientId, proProps }: Props) {
                         onClick={onCreateNew}
                         type="button"
                     >
-                        Create
+                        {__("Create", "tableberg")}
                     </Button>
                 </Flex>
                 <p className="tableberg-divider">
-                    <span>or</span>
+                    <span>{__("or", "tableberg")}</span>
                 </p>
-                <div className="tableberg-table-creator-container">
-                    <div className="tableberg-table-creator-left">
+                <div className="tableberg-table-creator-flex">
+                    <button
+                        className="tableberg-table-creator-btn"
+                        onClick={() => setModal("patterns")}
+                    >
+                        <div className="tableberg-table-creator-btn-icon">
+                            {PreBuiltTableIcon}
+                        </div>
+                        <span>{__("Pre-Built Table", "tableberg")}</span>
+                    </button>
+                    {!IS_PRO ? (
+                        <LockedTableType
+                            icon={WooTableIcon}
+                            selected={"product-table"}
+                            name={__("WooCommerce Table", "tableberg")}
+                            link={
+                                "https://tableberg.com/woocommerce-product-table-plugin/"
+                            }
+                        />
+                    ) : (
                         <button
                             className="tableberg-table-creator-btn"
-                            onClick={() => setModal("patterns")}
-                        >
-                            <div className="tableberg-table-creator-btn-icon">
-                                {PreBuiltTableIcon}
-                            </div>
-                            <span>Pre-Built Table</span>
-                        </button>
-                        <button
-                            className="tableberg-table-creator-btn"
-                            onClick={() => proProps.onCreateWooTable(storeActions)}
+                            onClick={() =>
+                                proProps?.onCreateWooTable(storeActions)
+                            }
                         >
                             <div className="tableberg-table-creator-btn-icon">
                                 {WooTableIcon}
                             </div>
-                            <span>WooCommerce Table</span>
+                            <span>{__("WooCommerce Table", "tableberg")}</span>
                         </button>
-                        <button 
-                            className={`tableberg-table-creator-btn ${!TABLEBERG_CFG.IS_PRO || !proProps?.AITableModal ? 'tableberg-pro-feature' : ''}`}
-                            onClick={() => {
-                                if (TABLEBERG_CFG.IS_PRO && proProps?.AITableModal) {
-                                    setModal("ai");
-                                } else {
-                                    setModal("ai-upsell");
-                                }
-                            }}
-                        >
-                            <div className="tableberg-table-creator-btn-icon">
-                                {AITableIcon}
-                            </div>
-                            <span>AI Table</span>
-                            {TABLEBERG_CFG.IS_PRO && (
-                                <span className="tableberg-table-creator-btn-badge">Pro</span>
-                            )}
-                        </button>
-                    </div>
-                    <div className="tableberg-table-creator-right">
-                        <button className="tableberg-table-creator-btn tableberg-upcoming">
-                            <div className="tableberg-table-creator-btn-icon">
-                                {DataTableIcon}
-                            </div>
-                            <span>Data Table (CSV, XML)</span>
-                        </button>
-                        <button className="tableberg-table-creator-btn tableberg-upcoming">
-                            <div className="tableberg-table-creator-btn-icon">
-                                {PostsTableIcon}
-                            </div>
-                            <span>Posts Table</span>
-                        </button>
-                    </div>
+                    )}
+                    <button className="tableberg-table-creator-btn tableberg-upcoming">
+                        <div className="tableberg-table-creator-btn-icon">
+                            {DataTableIcon}
+                        </div>
+                        <span>{__("Data Table (CSV, XML)", "tableberg")}</span>
+                    </button>
+                    <button
+                        className={`tableberg-table-creator-btn ${!IS_PRO || !proProps?.
+AITableModal ? 'tableberg-pro-feature' : ''}`}
+                        onClick={() => {
+                            if (IS_PRO && proProps?.AITableModal) {
+                                setModal("ai");
+                            } else {
+                                setModal("ai-upsell");
+                            }
+                        }}
+                    >
+                        <div className="tableberg-table-creator-btn-icon">
+                            {AITableIcon}
+                        </div>
+                        <span>{__("AI Table", "tableberg")}</span>
+                        {IS_PRO && (
+                            <span className="tableberg-table-creator-btn-badge">Pro</span>
+                        )}
+                    </button>
+                    <button className="tableberg-table-creator-btn tableberg-upcoming">
+                        <div className="tableberg-table-creator-btn-icon">
+                            {PostsTableIcon}
+                        </div>
+                        <span>{__("Posts Table", "tableberg")}</span>
+                    </button>
                 </div>
             </Placeholder>
             {modal === "patterns" && (

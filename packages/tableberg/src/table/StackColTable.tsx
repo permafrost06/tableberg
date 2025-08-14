@@ -19,14 +19,16 @@ import {
 } from "@tableberg/shared/utils/styling-helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { __ } from "@wordpress/i18n";
+import { RichText } from "@wordpress/block-editor";
 
 const useInnerBlocksUpdate = () => {
     const [key, setKey] = useState(0);
 
-    const incrementKey = () => setKey(k => k + 1);
+    const incrementKey = () => setKey((k) => k + 1);
 
     return [key, incrementKey] as [number, () => void];
-}
+};
 
 export default function StackColTable(
     props: BlockEditProps<TablebergBlockAttrs> & {
@@ -35,7 +37,14 @@ export default function StackColTable(
         headerAsCol: boolean;
     },
 ) {
-    const { attributes, tableBlock, clientId, setAttributes, stackCount, headerAsCol } = props;
+    const {
+        attributes,
+        tableBlock,
+        clientId,
+        setAttributes,
+        stackCount,
+        headerAsCol,
+    } = props;
 
     const innerBlocksProps = useInnerBlocksProps({
         // @ts-ignore false can obviously be assigned to renderAppender as does
@@ -61,20 +70,20 @@ export default function StackColTable(
     const {
         replaceInnerBlocks,
         updateBlockAttributes,
-    }: BlockEditorStoreActions = useDispatch(
-        blockEditorStore,
-    ) as any;
+    }: BlockEditorStoreActions = useDispatch(blockEditorStore) as any;
 
     const [updateKey, refreshInnerBlocks] = useInnerBlocksUpdate();
 
     useEffect(() => {
         const setRowPortalTarget = (
-            cell: TablebergCellInstance, row: number, setTemp = false
+            cell: TablebergCellInstance,
+            row: number,
+            setTemp = false,
         ) => {
             cell.attributes.responsiveTarget = `#tableberg-${clientId}-${row}`;
             cell.attributes.isTmp = setTemp;
             return cell;
-        }
+        };
 
         const stacksCount = Math.max(stackCount || 1, 1);
 
@@ -87,10 +96,12 @@ export default function StackColTable(
 
         (function generateRows() {
             for (let i = 0; i < rowsToGenerate; i++) {
-                const Row = ({ rowClass = "row" }) => <tr
-                    id={`tableberg-${clientId}-${i}`}
-                    className={`tableberg-${rowClass}`}
-                />;
+                const Row = ({ rowClass = "row" }) => (
+                    <tr
+                        id={`tableberg-${clientId}-${i}`}
+                        className={`tableberg-${rowClass}`}
+                    />
+                );
 
                 const isHeaderRow = i % attributes.rows === 0;
                 const isFooterRow = i % attributes.rows === attributes.rows - 1;
@@ -109,23 +120,30 @@ export default function StackColTable(
 
         (function addColumnToEachStack() {
             if (!headerAsCol) {
-                return
+                return;
             }
 
-            const leftColCells = cells.filter(cell => cell.attributes.col === 0);
-            const cellsExcludingLeftCol = cells.filter(cell => cell.attributes.col !== 0);
+            const leftColCells = cells.filter(
+                (cell) => cell.attributes.col === 0,
+            );
+            const cellsExcludingLeftCol = cells.filter(
+                (cell) => cell.attributes.col !== 0,
+            );
             cells = cellsExcludingLeftCol;
 
-            const leftColCellsWithGapsForRowspan: Array<TablebergCellInstance | "gap"> = [];
-            leftColCells.forEach(cell => {
+            const leftColCellsWithGapsForRowspan: Array<
+                TablebergCellInstance | "gap"
+            > = [];
+            leftColCells.forEach((cell) => {
                 leftColCellsWithGapsForRowspan.push(cell);
                 for (let i = 1; i < cell.attributes.rowspan; i++) {
                     leftColCellsWithGapsForRowspan.push("gap");
                 }
-            })
+            });
 
             for (let row = 0; row < template.length; row++) {
-                const col1Cell = leftColCellsWithGapsForRowspan[row % attributes.rows];
+                const col1Cell =
+                    leftColCellsWithGapsForRowspan[row % attributes.rows];
                 if (col1Cell === "gap") {
                     continue;
                 }
@@ -133,9 +151,11 @@ export default function StackColTable(
                     continue;
                 }
 
-                const clonedCol1Cell = cloneBlock(col1Cell) as TablebergCellInstance;
+                const clonedCol1Cell = cloneBlock(
+                    col1Cell,
+                ) as TablebergCellInstance;
 
-                const setTemp = row > (attributes.rows - 1) ? true : false;
+                const setTemp = row > attributes.rows - 1 ? true : false;
                 newCells.push(setRowPortalTarget(clonedCol1Cell, row, setTemp));
             }
         })();
@@ -147,10 +167,14 @@ export default function StackColTable(
                 }
 
                 const tableRows = attributes.rows;
-                const coli = headerAsCol ? cell.attributes.col - 1 : cell.attributes.col;
+                const coli = headerAsCol
+                    ? cell.attributes.col - 1
+                    : cell.attributes.col;
                 const rowi = cell.attributes.row;
 
-                let targetRow = tableRows * (Math.ceil((coli + 1) / stacksCount) - 1) + rowi;
+                let targetRow =
+                    tableRows * (Math.ceil((coli + 1) / stacksCount) - 1) +
+                    rowi;
 
                 newCells.push(setRowPortalTarget(cell, targetRow));
             }
@@ -162,10 +186,7 @@ export default function StackColTable(
         });
         setRowTemplate(template);
         refreshInnerBlocks();
-    }, [
-        stackCount,
-        headerAsCol,
-    ]);
+    }, [stackCount, headerAsCol]);
 
     useEffect(() => {
         setAttributes({
@@ -175,6 +196,18 @@ export default function StackColTable(
             },
         });
     }, []);
+
+    const table = (
+        <div
+            className="tableberg-table-wrapper"
+            style={{
+                ...getBorderCSS(attributes.tableBorder),
+                ...getBorderRadiusCSS(attributes.tableBorderRadius),
+            }}
+        >
+            <table {...blockProps}>{rowTemplate}</table>
+        </div>
+    );
 
     return (
         <>
@@ -186,15 +219,25 @@ export default function StackColTable(
                     <FontAwesomeIcon icon={faSearch} />
                 </div>
             )}
-            <div
-                className="tableberg-table-wrapper"
-                style={{
-                    ...getBorderCSS(attributes.tableBorder),
-                    ...getBorderRadiusCSS(attributes.tableBorderRadius),
-                }}
-            >
-                <table {...blockProps}>{rowTemplate}</table>
-            </div>
+            {attributes.showCaption ? (
+                <figure>
+                    {table}
+                    <RichText
+                        tagName="figcaption"
+                        value={attributes.caption}
+                        onChange={(caption) => setAttributes({ caption })}
+                        placeholder={__("Enter table caption...", "tableberg")}
+                        allowedFormats={[
+                            "core/bold",
+                            "core/italic",
+                            "core/strikethrough",
+                            "core/link",
+                        ]}
+                    />
+                </figure>
+            ) : (
+                table
+            )}
             <table style={{ display: "none" }} key={updateKey}>
                 <tbody>
                     <tr {...innerBlocksProps} />

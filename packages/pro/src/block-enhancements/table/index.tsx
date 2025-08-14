@@ -6,17 +6,16 @@ import { createBlock } from "@wordpress/blocks";
 import AITableModal from "../../ai-table/AITableModal";
 
 interface TableProProps {
-    onCreateWooTable: (
-        storeActions: BlockEditorStoreActions
-    ) => void;
+    onCreateWooTable: (storeActions: BlockEditorStoreActions) => void;
     AITableModal: React.ComponentType<{
         onClose: () => void;
         onInsert: (block: any) => void;
         currentBlockId: string;
     }>;
+
 }
 
-const TablePro = ({ props, BlockEdit }: ProBlockProps<TablebergBlockAttrs>) => {
+const TablePro = ({ props, BlockEdit }: ProBlockProps<TablebergBlockAttrs>) => {    
     const proProps: TableProProps = {
         onCreateWooTable: (storeActions) => {
             storeActions.replaceBlock(

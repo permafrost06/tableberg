@@ -1,7 +1,4 @@
-import {
-    BlockEditProps,
-    BlockInstance,
-} from "@wordpress/blocks";
+import { BlockEditProps, BlockInstance } from "@wordpress/blocks";
 import { TablebergBlockAttrs } from "@tableberg/shared/types";
 import { createArray } from "../utils";
 import { useEffect, useRef, useState } from "react";
@@ -20,8 +17,8 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { __ } from '@wordpress/i18n';
-
+import { __ } from "@wordpress/i18n";
+import { RichText } from "@wordpress/block-editor";
 
 export const ALLOWED_BLOCKS = ["tableberg/cell"];
 
@@ -52,9 +49,9 @@ export const PrimaryTable = (
 
     const [colUpt, setColUpt] = useState(0);
 
-    const {
-        removeBlocks,
-    } = useDispatch(blockEditorStore) as any as BlockEditorStoreActions;
+    const { removeBlocks } = useDispatch(
+        blockEditorStore,
+    ) as any as BlockEditorStoreActions;
 
     const lastRowCount = useRef(attributes.rows);
     useEffect(() => {
@@ -66,8 +63,8 @@ export const PrimaryTable = (
     }, [attributes.rows, attributes.cells]);
 
     const toRemoves = tableBlock.innerBlocks
-    .filter((cell) => cell.attributes.isTmp)
-    .map((cell) => cell.clientId);
+        .filter((cell) => cell.attributes.isTmp)
+        .map((cell) => cell.clientId);
 
     setAttributes({
         cells: attributes.cells - toRemoves.length,
@@ -78,7 +75,7 @@ export const PrimaryTable = (
     } catch (e) {
         console.warn(
             "Tableberg: Tried to call removeBlocks before the previous call has returned. React might be running in development mode.",
-            e
+            e,
         );
     }
 
@@ -87,11 +84,44 @@ export const PrimaryTable = (
 
     useEffect(() => {
         const vRows: number[] = [];
+
+        const highlights = document.querySelectorAll(
+            ".tableberg-search-highlight",
+        );
+        highlights.forEach((highlight) => {
+            const parent = highlight.parentNode;
+            if (parent) {
+                parent.replaceChild(
+                    document.createTextNode(highlight.textContent || ""),
+                    highlight,
+                );
+            }
+        });
+
         if (tableRef.current && search.length > 2) {
             const rows = tableRef.current.querySelector("tbody")?.children;
             Array.from(rows!).forEach((row, idx) => {
-                if (!row.textContent?.includes(search)) {
+                if (
+                    !row.textContent
+                        ?.toLowerCase()
+                        .includes(search.toLowerCase())
+                ) {
                     vRows.push(idx);
+                } else {
+                    const cells = row.querySelectorAll("td, th");
+                    cells.forEach((cell) => {
+                        const text = cell.textContent || "";
+                        if (text.toLowerCase().includes(search.toLowerCase())) {
+                            const regex = new RegExp(
+                                `(${search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
+                                "gi",
+                            );
+                            cell.innerHTML = text.replace(
+                                regex,
+                                '<span class="tableberg-search-highlight">$1</span>',
+                            );
+                        }
+                    });
                 }
             });
         }
@@ -136,6 +166,55 @@ export const PrimaryTable = (
         fixedWidth = `${100 / attributes.cols}%`;
     }
 
+    const table = (
+        <div
+            className="tableberg-table-wrapper"
+            style={{
+                ...getBorderCSS(attributes.tableBorder),
+                ...getBorderRadiusCSS(attributes.tableBorderRadius),
+            }}
+        >
+            <table {...blockProps}>
+                <colgroup>
+                    {fixedWidth
+                        ? Array(attributes.cols)
+                              .fill("")
+                              .map((_, i) => {
+                                  const colStyle = attributes.colStyles[i];
+                                  return (
+                                      <col
+                                          style={{
+                                              width: fixedWidth,
+                                              minWidth: fixedWidth,
+                                              background:
+                                                  colStyle?.bgGradient ||
+                                                  colStyle?.background,
+                                          }}
+                                      />
+                                  );
+                              })
+                        : Array(attributes.cols)
+                              .fill("")
+                              .map((_, i) => {
+                                  const colStyle = attributes.colStyles[i];
+                                  return (
+                                      <col
+                                          style={{
+                                              width: colStyle?.width,
+                                              minWidth: colStyle?.width,
+                                              background:
+                                                  colStyle?.bgGradient ||
+                                                  colStyle?.background,
+                                          }}
+                                      />
+                                  );
+                              })}
+                </colgroup>
+                <tbody>{rowTemplate}</tbody>
+            </table>
+        </div>
+    );
+
     return (
         <>
             {attributes.search && (
@@ -146,57 +225,34 @@ export const PrimaryTable = (
                         type="text"
                         value={search}
                         onChange={(e) => setSearch(e.target.value.trim())}
-                        placeholder={ attributes.searchPlaceholder !== "Search..." ? attributes.searchPlaceholder : __('Search...', 'tableberg')}
+                        placeholder={
+                            attributes.searchPlaceholder !== "Search..."
+                                ? attributes.searchPlaceholder
+                                : __("Search...", "tableberg")
+                        }
                     />
                     <FontAwesomeIcon icon={faSearch} />
                 </div>
             )}
-            <div
-                className="tableberg-table-wrapper"
-                style={{
-                    ...getBorderCSS(attributes.tableBorder),
-                    ...getBorderRadiusCSS(attributes.tableBorderRadius),
-                }}
-            >
-                <table {...blockProps}>
-                    <colgroup>
-                        {fixedWidth
-                            ? Array(attributes.cols)
-                                  .fill("")
-                                  .map((_, i) => {
-                                      const colStyle = attributes.colStyles[i];
-                                      return (
-                                          <col
-                                              style={{
-                                                  width: fixedWidth,
-                                                  minWidth: fixedWidth,
-                                                  background:
-                                                      colStyle?.bgGradient ||
-                                                      colStyle?.background,
-                                              }}
-                                          />
-                                      );
-                                  })
-                            : Array(attributes.cols)
-                                  .fill("")
-                                  .map((_, i) => {
-                                      const colStyle = attributes.colStyles[i];
-                                      return (
-                                          <col
-                                              style={{
-                                                  width: colStyle?.width,
-                                                  minWidth: colStyle?.width,
-                                                  background:
-                                                      colStyle?.bgGradient ||
-                                                      colStyle?.background,
-                                              }}
-                                          />
-                                      );
-                                  })}
-                    </colgroup>
-                    <tbody>{rowTemplate}</tbody>
-                </table>
-            </div>
+            {attributes.showCaption ? (
+                <figure>
+                    {table}
+                    <RichText
+                        tagName="figcaption"
+                        value={attributes.caption}
+                        onChange={(caption) => setAttributes({ caption })}
+                        placeholder={__("Enter table caption...", "tableberg")}
+                        allowedFormats={[
+                            "core/bold",
+                            "core/italic",
+                            "core/strikethrough",
+                            "core/link",
+                        ]}
+                    />
+                </figure>
+            ) : (
+                table
+            )}
             <div style={{ display: "none" }} key={colUpt}>
                 <div {...innerBlocksProps} />
             </div>

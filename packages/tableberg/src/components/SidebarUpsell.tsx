@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { __ } from "@wordpress/i18n";
 import UpsellModal from "./UpsellModal";
 
 export function SidebarUpsell() {
@@ -11,17 +12,17 @@ export function SidebarUpsell() {
             >
                 <div
                     className={"tableberg-upsell-inspector-notice"}
-                    title={"click for more info"}
+                    title={__("click for more info", "tableberg")}
                 >
                     <div className={"tableberg-upsell-notice-icon-container"}>
                         <img
-                            alt={"Tableberg logo"}
+                            alt={__("Tableberg logo", "tableberg")}
                             src={tablebergAdminMenuData?.assets.logoTransparent}
                         />
                     </div>
                     <div className={"tableberg-upsell-notice"}>
                         <span>
-                            <b>Tableberg</b> has <b>PRO</b>
+                            <b>{__("Tableberg", "tableberg")}</b> {__("has", "tableberg")} <b>{__("PRO", "tableberg")}</b>
                             <br /> enhancements.
                         </span>
                     </div>

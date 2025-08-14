@@ -4,27 +4,23 @@ namespace Tableberg\Pro\Blocks;
 
 /**
  *
- *@package Tableberg_pro 
+ *@package Tableberg_pro
  */
 
-class DynamicField
-{
-
-    public function __construct()
-    {
-        add_action("init", [$this, "register_block"]);
+class DynamicField {
+    public function __construct() {
+        add_action('init', [$this, 'register_block']);
     }
 
-    public function register_block()
-    {
+    public function register_block() {
         $json = TABLEBERG_PRO_DIR_PATH . 'dist/blocks/dynamic-field/block.json';
         $attrs = json_decode(file_get_contents($json), true)['attributes'];
 
         register_block_type_from_metadata(
             $json,
             [
-                "attributes" => $attrs,
-                "render_callback" => [$this, "render_block"],
+                'attributes' => $attrs,
+                'render_callback' => [$this, 'render_block'],
             ]
         );
     }
@@ -62,11 +58,11 @@ class DynamicField
         $target = $block->parsed_block['attrs']['target'] ?? '';
 
         $dom = new \DOMDocument();
-        $dom->loadHTML($content, LIBXML_HTML_NOIMPLIED|LIBXML_HTML_NODEFDTD);
+        $dom->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $tags = new \DOMXPath($dom);
 
         if (empty($target)) {
-            $pTag = $tags->query("//p")[0];
+            $pTag = $tags->query('//p')[0];
 
             $this->setInnerHTML($pTag, $value);
 
@@ -76,7 +72,7 @@ class DynamicField
         if ($target === 'tableberg/image') {
             $url = $value['url'];
 
-            $imgTag = $tags->query("//img")[0];
+            $imgTag = $tags->query('//img')[0];
             if (!empty($imgTag)) {
                 $imgTag->setAttribute('src', $url);
             }
@@ -86,14 +82,18 @@ class DynamicField
 
         if ($target === 'tableberg/button') {
             $buttonDiv = $tags->query("//div[contains(@class, 'wp-block-tableberg-button')]")[0];
-            $buttonDiv->setAttribute('data-tableberg-woo-product-id', $value);
+            if (!empty($buttonDiv)) {
+                $buttonDiv->setAttribute('data-tableberg-woo-product-id', $value);
+            }
 
             return $dom->saveHTML();
         }
 
         if ($target === 'tableberg-pro/woo-variation-picker') {
             $pickerDiv = $tags->query("//div[contains(@class, 'tableberg-woo-variation-picker')]")[0];
-            $pickerDiv->setAttribute('data-tableberg-woo-variation-props', json_encode($value));
+            if (!empty($pickerDiv)) {
+                $pickerDiv->setAttribute('data-tableberg-woo-variation-props', json_encode($value));
+            }
 
             return $dom->saveHTML();
         }
