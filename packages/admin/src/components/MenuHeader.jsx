@@ -19,10 +19,9 @@ function MenuHeader({ currentRoutePath, setCurrentRoutePath }) {
         window.history.pushState(null, null, url.href);
     }, [currentRoutePath]);
 
-    const routeObjectsMinus404 = useMemo(
-        () => routeObjects.slice(0, routeObjects.length - 1),
-        [],
-    );
+    const routeObjectsMinus404 = useMemo(() => {
+        return routeObjects.slice(0, routeObjects.length - 1);
+    }, []);
     const logoUrl = tablebergAdminMenuData?.assets.logo;
     const versionData = tablebergAdminMenuData?.versionControl;
 

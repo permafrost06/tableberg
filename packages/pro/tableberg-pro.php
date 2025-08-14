@@ -36,6 +36,7 @@ if (!defined('TABLEBERG_PRO_PLUGIN_FILE')) {
 use Tableberg\Patterns\RegisterPatterns;
 use Tableberg\Pro\Assets;
 use Tableberg\Pro\Blocks;
+use Tableberg\Pro\Admin\AI_Table_Admin;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -144,6 +145,7 @@ function tp_fs_init() {
                     new Blocks\Button();
                     new Blocks\WooVariationPicker();
                     new Assets();
+                    new AI_Table_Admin();
 
                     add_action('init', array($this, 'init_actions'));
                 }
@@ -181,6 +183,19 @@ if (tp_fs_is_parent_active_and_loaded()) {
 function load_pro_textdomain() {
     load_plugin_textdomain('tableberg', false, dirname(plugin_basename(__FILE__)) . '/languages');
 }
+
+// Initialize AI Table REST routes early
+add_action('plugins_loaded', function() {
+    if (tp_fs_is_parent_active_and_loaded() && function_exists('tp_fs') && tp_fs()->can_use_premium_code()) {
+        // Ensure REST routes are registered early
+        add_action('rest_api_init', function() {
+            if (class_exists('Tableberg\Pro\Admin\AI_Table_Admin')) {
+                $ai_admin = new Tableberg\Pro\Admin\AI_Table_Admin();
+                // The constructor already registers routes, but we ensure it's early
+            }
+        }, 1); // High priority
+    }
+});
 
 add_action('admin_init', function () {
     if (!is_plugin_active('tableberg/tableberg.php')) {

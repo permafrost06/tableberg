@@ -3,6 +3,61 @@
 .tableberg-table-creator {
     border: 1px solid black;
 
+  border: 1px solid black;
+
+  .components-placeholder {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  &-left,
+  &-right {
+    display: flex;
+    align-items: start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  &-left {
+    flex: 1;
+  }
+
+  &-right {
+    flex: 0 0 auto;
+  }
+
+  &-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    min-width: 100px;
+    margin-bottom: 10px;
+    padding: 0;
+
+    &-icon {
+      border: 1px solid black;
+      border-radius: 10px;
+      margin-bottom: 5px;
+      height: 100px;
+      width: 100px;
+      box-sizing: border-box;
+
+      svg {
+        display: block;
+        height: 60px;
+        width: 60px;
+        margin: auto;
+        margin-top: 20px;
+      }
     .components-placeholder {
         outline: none;
         box-shadow: none;
@@ -94,6 +149,37 @@
             }
         }
     }
+    
+    &.tableberg-pro-feature {
+      position: relative;
+      
+      &:after {
+        content: "PRO";
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        font-size: 10px;
+        font-weight: 600;
+        background: #7a00df;
+        color: white;
+        padding: 2px 6px;
+        border-radius: 3px;
+      }
+    }
+  }
+  
+  &-btn-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    background: #7a00df;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
 
     &-heading {
         font-size: 0.9rem;

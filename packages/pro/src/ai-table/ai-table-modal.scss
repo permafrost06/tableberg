@@ -1,0 +1,1063 @@
+// Custom modal backdrop and container
+.tableberg-custom-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tableberg-custom-modal-container {
+    width: 800px;
+    max-width: 90vw;
+    height: 850px;
+    max-height: 95vh;
+    min-height: 700px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    overflow: hidden;
+    outline: none;
+}
+
+.tableberg-custom-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #fff;
+}
+
+.tableberg-custom-modal-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e1e1e;
+}
+
+.tableberg-custom-modal-close {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+    padding: 0;
+    
+    &:hover {
+        background: #f0f0f0;
+    }
+}
+
+.tableberg-custom-modal-content {
+    overflow-y: auto;
+    background: #fff;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas: 
+        "header"
+        "content"
+        "footer";
+}
+
+// Header section
+.tableberg-ai-modal-header {
+    grid-area: header;
+    padding: 24px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    .tableberg-ai-modal-back {
+        margin-right: 16px;
+        
+        &:hover {
+            color: var(--wp-admin-theme-color);
+        }
+    }
+}
+
+// Breadcrumb navigation
+.tableberg-ai-modal-breadcrumb {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #757575;
+    
+    &-step {
+        color: #757575;
+        cursor: pointer;
+        
+        &:hover {
+            color: var(--wp-admin-theme-color);
+        }
+    }
+    
+    &-separator {
+        margin: 0 8px;
+        color: #ccc;
+    }
+    
+    &-current {
+        color: #1e1e1e;
+        font-weight: 500;
+    }
+}
+
+// Main content section
+.tableberg-ai-modal-content {
+    grid-area: content;
+    padding: 24px;
+    overflow-y: auto;
+    background: #fff;
+}
+
+// Footer section
+.tableberg-ai-modal-footer {
+    grid-area: footer;
+    padding: 20px 24px;
+    border-top: 1px solid #e0e0e0;
+    background: #fff;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+    .components-button {
+        min-width: 180px;
+        height: 40px;
+    }
+}
+
+// Method selection screen
+.tableberg-ai-modal-methods {
+    h3 {
+        margin: 0 0 32px;
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+    }
+}
+
+.tableberg-ai-modal-method-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    
+    @media (max-width: 782px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.tableberg-ai-modal-method {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    
+    &:hover:not(:disabled) {
+        border-color: var(--wp-admin-theme-color);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    &:focus {
+        outline: 2px solid var(--wp-admin-theme-color);
+        outline-offset: 2px;
+    }
+    
+    &--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        
+        &:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: #ddd;
+        }
+    }
+}
+
+.tableberg-ai-modal-method-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.tableberg-ai-modal-method-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #1e1e1e;
+}
+
+.tableberg-ai-modal-method-desc {
+    font-size: 13px;
+    color: #757575;
+}
+
+// Prompt input section
+.tableberg-ai-prompt-input {
+    .components-base-control {
+        margin-bottom: 20px;
+    }
+    
+    .components-base-control__label {
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+    
+    .components-textarea-control__input {
+        min-height: 100px;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+}
+
+.tableberg-ai-templates {
+    margin-bottom: 16px;
+    
+    &-label {
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0 0 8px;
+        color: #1e1e1e;
+    }
+    
+    .components-flex {
+        gap: 6px;
+    }
+    
+    .components-button {
+        font-size: 12px;
+        height: 30px;
+    }
+}
+
+.tableberg-ai-examples {
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    
+    &-label {
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0 0 8px;
+        color: #1e1e1e;
+    }
+    
+    ul {
+        margin: 0;
+        padding-left: 18px;
+        
+        li {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 6px;
+            line-height: 1.3;
+            
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+// Loading state
+.tableberg-ai-loading,
+.tableberg-ai-modal-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    padding: 40px 20px;
+    
+    .components-spinner {
+        margin-bottom: 16px;
+    }
+    
+    p {
+        font-size: 16px;
+        margin: 0 0 24px;
+        color: #1e1e1e;
+    }
+}
+
+// Enhanced loading animation
+.tableberg-ai-loading-animation {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    
+    .components-spinner {
+        margin: 0;
+        z-index: 2;
+    }
+    
+    .tableberg-ai-loading-pulse {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        border: 2px solid rgba(0, 123, 255, 0.3);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.4);
+        opacity: 0;
+    }
+}
+
+// Loading header
+.tableberg-ai-loading-header {
+    margin-bottom: 24px;
+    
+    h3 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #1e1e1e;
+        margin: 0 0 8px;
+    }
+    
+    .tableberg-ai-loading-motivational {
+        font-size: 14px;
+        color: #757575;
+        margin: 0;
+        animation: fadeInOut 3s infinite;
+    }
+}
+
+// Progress bar
+.tableberg-ai-loading-progress {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 32px;
+    
+    &-bar {
+        width: 100%;
+        height: 8px;
+        background: #e0e0e0;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 8px;
+        
+        &-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #007cba 0%, #00a0d2 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            position: relative;
+            
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+                animation: shimmer 2s infinite;
+            }
+        }
+    }
+    
+    &-text {
+        font-size: 12px;
+        color: #757575;
+        text-align: center;
+        font-weight: 500;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+// Enhanced steps
+.tableberg-ai-loading-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 24px;
+}
+
+.tableberg-ai-loading-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #e0e0e0;
+    transition: all 0.3s ease;
+    
+    &.completed {
+        background: #e8f5e8;
+        border-left-color: #4caf50;
+        
+        .tableberg-ai-loading-step-icon {
+            color: #4caf50;
+        }
+        
+        .tableberg-ai-loading-step-label {
+            color: #2e7d32;
+            text-decoration: line-through;
+        }
+    }
+    
+    &.active {
+        background: #e3f2fd;
+        border-left-color: #2196f3;
+        animation: activeStep 2s infinite;
+        
+        .tableberg-ai-loading-step-icon {
+            color: #2196f3;
+            animation: bounce 1s infinite;
+        }
+        
+        .tableberg-ai-loading-step-label {
+            color: #1976d2;
+            font-weight: 600;
+        }
+        
+        .tableberg-ai-loading-step-description {
+            color: #1976d2;
+            animation: fadeInOut 2s infinite;
+        }
+    }
+    
+    &.pending {
+        opacity: 0.6;
+        
+        .tableberg-ai-loading-step-icon {
+            color: #bdbdbd;
+        }
+        
+        .tableberg-ai-loading-step-label {
+            color: #757575;
+        }
+    }
+    
+    &-icon {
+        font-size: 20px;
+        line-height: 1;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+    
+    &-content {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    &-label {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 4px;
+        line-height: 1.3;
+    }
+    
+    &-description {
+        font-size: 12px;
+        color: #757575;
+        line-height: 1.3;
+    }
+}
+
+@keyframes activeStep {
+    0%, 100% {
+        box-shadow: 0 0 0 rgba(33, 150, 243, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.4);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+// Tips section
+.tableberg-ai-loading-tips {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 16px;
+    
+    .tableberg-ai-loading-tip {
+        padding: 12px 16px;
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 6px;
+        font-size: 13px;
+        color: #856404;
+        line-height: 1.4;
+        animation: slideIn 0.5s ease;
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Loading time
+.tableberg-ai-loading-time {
+    font-size: 12px;
+    color: #9e9e9e;
+    font-weight: 500;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.4; }
+    33% { opacity: 1; }
+}
+
+// Enhanced error state
+.tableberg-ai-modal-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+    
+    .tableberg-ai-error-icon {
+        font-size: 48px;
+        margin-bottom: 16px;
+        opacity: 0.8;
+    }
+    
+    .tableberg-ai-error-content {
+        max-width: 500px;
+        
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e1e1e;
+            margin: 0 0 16px;
+        }
+        
+        .tableberg-ai-error-message {
+            margin-bottom: 24px;
+            
+            .components-notice {
+                margin: 0;
+            }
+        }
+        
+        .tableberg-ai-error-suggestions {
+            text-align: left;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            
+            h4 {
+                font-size: 16px;
+                font-weight: 600;
+                color: #1e1e1e;
+                margin: 0 0 12px;
+            }
+            
+            ul {
+                margin: 0;
+                padding-left: 20px;
+                
+                li {
+                    font-size: 14px;
+                    color: #555;
+                    margin-bottom: 8px;
+                    line-height: 1.4;
+                    
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Actions for error state
+.tableberg-ai-modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    
+    .components-button {
+        min-width: 120px;
+        
+        &.is-primary {
+            order: 1;
+        }
+        
+        &.is-secondary {
+            order: 2;
+        }
+        
+        &.is-link {
+            order: 3;
+            font-size: 13px;
+            text-decoration: none;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    
+    @media (max-width: 480px) {
+        flex-direction: column;
+        
+        .components-button {
+            width: 100%;
+        }
+    }
+}
+
+// Configuration notice
+.tableberg-ai-modal-configure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    
+    .components-notice {
+        margin-bottom: 20px;
+        max-width: 500px;
+    }
+    
+    p {
+        font-size: 14px;
+        margin: 0 0 24px;
+        color: #1e1e1e;
+        max-width: 400px;
+    }
+}
+
+// Content input styles
+.tableberg-ai-modal-content-input {
+    h3 {
+        margin: 0 0 8px 0;
+        font-size: 18px;
+        color: #1e1e1e;
+        font-weight: 500;
+    }
+    
+    p {
+        margin: 0 0 16px 0;
+        color: #757575;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+}
+
+.tableberg-ai-modal-content-preview {
+    margin-bottom: 16px;
+    
+    .tableberg-ai-modal-content-textarea {
+        width: 100%;
+        min-height: 200px;
+        max-height: 400px;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        font-size: 14px;
+        line-height: 1.4;
+        resize: vertical;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        
+        &:focus {
+            outline: none;
+            border-color: var(--wp-admin-theme-color);
+            box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
+        }
+        
+        &::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+    }
+}
+
+.tableberg-ai-modal-content-status {
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tableberg-ai-modal-word-count {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 12px;
+    
+    &.within-limits {
+        color: #2ea043;
+        background: #dcfce7;
+    }
+    
+    &.exceeds-limits {
+        color: #d93025;
+        background: #fef2f2;
+    }
+}
+
+.tableberg-ai-modal-content-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 16px;
+    
+    .components-button {
+        padding: 8px 16px;
+        height: 36px;
+        
+        &.is-secondary {
+            border: 1px solid #ddd;
+            
+            &:hover:not(:disabled) {
+                border-color: #999;
+            }
+        }
+        
+        &.is-primary {
+            &:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+// Enhanced tips section
+.tableberg-ai-tips {
+    background: #f0f8ff;
+    border: 1px solid #b3d9ff;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+    
+    &-header {
+        font-size: 14px;
+        color: #1e40af;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        
+        strong {
+            font-weight: 600;
+        }
+    }
+    
+    &-content {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .tableberg-ai-tip {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        
+        &-label {
+            font-weight: 600;
+            color: #1e40af;
+            font-size: 13px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        &-text {
+            font-size: 13px;
+            color: #1e40af;
+            line-height: 1.4;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .tableberg-ai-tip {
+            flex-direction: column;
+            gap: 4px;
+            
+            &-label {
+                white-space: normal;
+            }
+        }
+    }
+}
+
+// Enhanced prompt input styles
+.tableberg-ai-prompt-input {
+    .tableberg-ai-prompt-textarea-wrapper {
+        position: relative;
+        margin-bottom: 20px;
+        
+        .tableberg-ai-prompt-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 6px;
+            font-size: 12px;
+            color: #757575;
+            
+            span {
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+// Image input styles
+.tableberg-ai-modal-image-input {
+    h3 {
+        margin: 0 0 8px 0;
+        font-size: 18px;
+        color: #1e1e1e;
+        font-weight: 500;
+    }
+    
+    p {
+        margin: 0 0 20px 0;
+        color: #757575;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+}
+
+// Upload area
+.tableberg-ai-modal-upload-area {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 40px 20px;
+    text-align: center;
+    background: #fafafa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    
+    &:hover, &.drag-over {
+        border-color: var(--wp-admin-theme-color);
+        background: #f0f8ff;
+        
+        .tableberg-ai-modal-upload-icon {
+            transform: scale(1.1);
+        }
+    }
+    
+    &.drag-over {
+        border-style: solid;
+        background: #e3f2fd;
+    }
+}
+
+.tableberg-ai-modal-upload-content {
+    h4 {
+        margin: 16px 0 8px;
+        font-size: 16px;
+        color: #1e1e1e;
+        font-weight: 500;
+    }
+    
+    p {
+        margin: 0 0 20px;
+        font-size: 14px;
+        color: #757575;
+    }
+}
+
+.tableberg-ai-modal-upload-icon {
+    font-size: 48px;
+    transition: transform 0.3s ease;
+    opacity: 0.7;
+}
+
+.tableberg-ai-modal-upload-requirements {
+    margin-top: 16px;
+    color: #757575;
+    font-size: 12px;
+}
+
+// Image preview
+.tableberg-ai-modal-image-preview {
+    margin-bottom: 20px;
+}
+
+.tableberg-ai-modal-image-container {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tableberg-ai-modal-preview-image {
+    max-width: 100%;
+    max-height: 300px;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.tableberg-ai-modal-remove-image {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    min-width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+        background: #fff;
+        color: #d93025;
+        border-color: #d93025;
+        transform: scale(1.1);
+    }
+}
+
+// Focus options
+.tableberg-ai-modal-focus-options {
+    label {
+        display: block;
+        margin-bottom: 12px;
+        font-size: 14px;
+        color: #1e1e1e;
+    }
+}
+
+.tableberg-ai-modal-focus-grid {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    
+    .components-button {
+        font-size: 13px;
+        height: 36px;
+        padding: 0 12px;
+        border-radius: 18px;
+        border: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+        
+        &.is-primary {
+            background: var(--wp-admin-theme-color);
+            border-color: var(--wp-admin-theme-color);
+            color: #fff;
+        }
+        
+        &.is-secondary {
+            background: #fff;
+            color: #555;
+            
+            &:hover:not(:disabled) {
+                border-color: var(--wp-admin-theme-color);
+                color: var(--wp-admin-theme-color);
+            }
+        }
+    }
+}
+
+.tableberg-ai-modal-focus-help {
+    font-size: 12px;
+    color: #757575;
+    line-height: 1.4;
+}
+
+// Mobile responsive adjustments
+@media (max-width: 768px) {
+    .tableberg-ai-modal-upload-area {
+        padding: 30px 15px;
+        
+        .tableberg-ai-modal-upload-icon {
+            font-size: 36px;
+        }
+        
+        h4 {
+            font-size: 14px;
+        }
+        
+        p {
+            font-size: 13px;
+        }
+    }
+    
+    .tableberg-ai-modal-focus-grid {
+        .components-button {
+            flex: 1;
+            justify-content: center;
+        }
+    }
+    
+    .tableberg-ai-modal-preview-image {
+        max-height: 200px;
+    }
+}
