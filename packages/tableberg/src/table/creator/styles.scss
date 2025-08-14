@@ -3,72 +3,33 @@
 .tableberg-table-creator {
     border: 1px solid black;
 
-  border: 1px solid black;
-
-  .components-placeholder {
-    outline: none;
-    box-shadow: none;
-  }
-
-  &-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-  }
-
-  &-left,
-  &-right {
-    display: flex;
-    align-items: start;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  &-left {
-    flex: 1;
-  }
-
-  &-right {
-    flex: 0 0 auto;
-  }
-
-  &-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    width: 100px;
-    min-width: 100px;
-    margin-bottom: 10px;
-    padding: 0;
-
-    &-icon {
-      border: 1px solid black;
-      border-radius: 10px;
-      margin-bottom: 5px;
-      height: 100px;
-      width: 100px;
-      box-sizing: border-box;
-
-      svg {
-        display: block;
-        height: 60px;
-        width: 60px;
-        margin: auto;
-        margin-top: 20px;
-      }
     .components-placeholder {
         outline: none;
         box-shadow: none;
     }
 
-    &-flex {
+    &-container {
         width: 100%;
         display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    &-left,
+    &-right {
+        display: flex;
         align-items: start;
-        justify-content: space-around;
+        justify-content: flex-start;
         flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    &-left {
+        flex: 1;
+    }
+
+    &-right {
+        flex: 0 0 auto;
     }
 
     &-btn {
@@ -101,25 +62,6 @@
             font-size: 13px;
         }
 
-        &.tableberg-upsell {
-            position: relative;
-
-            &::before {
-                content: "PRO";
-                position: absolute;
-                top: -5px;
-                right: -5px;
-                background-color: rgb(103 31 235);
-                color: white;
-                font-size: 0.7rem;
-                font-weight: bold;
-                padding: 4px 10px;
-                border-radius: 10px;
-                box-shadow: 1px 2px 6px #c1c1c1;
-                z-index: 2;
-            }
-        }
-
         &.tableberg-upcoming {
             position: relative;
             cursor: not-allowed;
@@ -148,13 +90,26 @@
                 z-index: 2;
             }
         }
+
+        &.tableberg-pro-feature {
+            position: relative;
+
+            &:after {
+                content: "PRO";
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                font-size: 10px;
+                font-weight: 600;
+                background: #7a00df;
+                color: white;
+                padding: 2px 6px;
+                border-radius: 3px;
+            }
+        }
     }
-    
-    &.tableberg-pro-feature {
-      position: relative;
-      
-      &:after {
-        content: "PRO";
+
+    &-btn-badge {
         position: absolute;
         top: 8px;
         right: 8px;
@@ -164,22 +119,8 @@
         color: white;
         padding: 2px 6px;
         border-radius: 3px;
-      }
+        text-transform: uppercase;
     }
-  }
-  
-  &-btn-badge {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    font-size: 10px;
-    font-weight: 600;
-    background: #7a00df;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 3px;
-    text-transform: uppercase;
-  }
 
     &-heading {
         font-size: 0.9rem;
