@@ -2,6 +2,14 @@
 
 Advanced Table Block for Wordpress Block Editor
 
+## Screenshots
+
+### Pricing table example
+
+![Three colorful pricing plans rendered with Tableberg on its public demo site](docs/screenshots/pricing-tables.png)
+
+Rendered output from the [public pricing table demo](https://tableberg.com/pricing-tables-demo/). The plan names and prices are sample content.
+
 ## Project Setup
 
 This project is a pnpm monorepo. You **need** to have `pnpm` installed on your system: https://pnpm.io/installation
